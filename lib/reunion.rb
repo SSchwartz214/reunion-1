@@ -11,4 +11,8 @@ class Reunion
     @activities << activity
   end
 
+  def total_cost(activities)
+    activities.inject(0) {|sum, activity| sum += activity.cost}
+  end
+  
 end

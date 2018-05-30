@@ -24,4 +24,15 @@ class ReunionTest < Minitest::Test
 
     assert_equal 50, reunion.activities.last.cost
   end
+
+  def test_it_can_calculate_total_cost
+    reunion = Reunion.new("Miami")
+    activity_1 = Activity.new("Golf", 100)
+    activity_2 = Activity.new("Surfing", 50)
+
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+
+    assert_equal 150, reunion.total_cost([activity_1, activity_2])
+  end
 end
