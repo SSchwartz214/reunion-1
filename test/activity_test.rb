@@ -6,15 +6,16 @@ require './lib/participant'
 
 class ActivityTest < Minitest::Test
 
-  def test_it_has_a_type
-    activity = Activity.new("golfing")
+  def test_it_has_a_name
+    activity = Activity.new("golfing", 100)
 
 
     assert_equal "golfing", activity.name
+    assert_equal 100, activity.cost
   end
 
   def test_it_can_add_participants
-    activity = Activity.new("golfing")
+    activity = Activity.new("golfing", 100)
     participant_1 = Participant.new({name: "Jimmy", amount_paid: 50})
     participant_2 = Participant.new({name: "John", amount_paid: 50})
 
@@ -27,6 +28,17 @@ class ActivityTest < Minitest::Test
 
     assert_equal 2, activity.participants.count
     assert_equal "John", activity.participants.last.name
+  end
+
+  def test_it_has_cost_per_participant
+    activity = Activity.new("golfing", 100)
+    participant_1 = Participant.new({name: "Jimmy", amount_paid: 50})
+    participant_2 = Participant.new({name: "John", amount_paid: 50})
+
+    activity.add_participant(participant_1)
+    activity.add_participant(participant_2)
+
+    assert_equal 50, activity.cost_per_participant
   end
 
 end
