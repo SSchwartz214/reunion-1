@@ -17,4 +17,8 @@ class Activity
     @cost / @participants.count
   end
 
+  def amount_owed(participant)
+    cost_per_participant - participant.amount_paid
+  end
+  
 end

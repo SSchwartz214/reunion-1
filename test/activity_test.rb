@@ -41,4 +41,14 @@ class ActivityTest < Minitest::Test
     assert_equal 50, activity.cost_per_participant
   end
 
+  def test_it_can_calculate_amount_owed
+    activity = Activity.new("golfing", 100)
+    participant_1 = Participant.new({name: "Jimmy", amount_paid: 75})
+    participant_2 = Participant.new({name: "John", amount_paid: 25})
+
+    activity.add_participant(participant_1)
+    activity.add_participant(participant_2)
+
+    assert_equal 25, activity.amount_owed(participant_1).abs
+  end
 end
