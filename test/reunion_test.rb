@@ -1,6 +1,7 @@
 require 'minitest'
 require 'minitest/test'
 require 'minitest/autorun'
+require 'mocha/minitest'
 require './lib/reunion'
 
 class ReunionTest < Minitest::Test
@@ -12,16 +13,22 @@ class ReunionTest < Minitest::Test
 
   def test_it_can_have_activities
     reunion = Reunion.new("Miami")
-    activity_1 = Activity.new("Golf", 100)
-    activity_2 = Activity.new("Surfing", 50)
+    # activity_1 = Activity.new("Golf", 100)
+    # activity_2 = Activity.new("Surfing", 50)
 
-    reunion.add_activity(activity_1)
+    # activity_1 = mock
+    # # activity_2 = mock
 
-    assert_equal 1, reunion.activities.count
-    assert_equal "Golf", reunion.activities.last.name
+    activity_1 = stub(:name => "Golf", :cost => 50 )
+    activity_2 = stub(:cost => "Surfing")
 
     reunion.add_activity(activity_2)
+    reunion.add_activity(activity_1)
 
+    # assert_equal 1, reunion.activities.count
+    assert_equal "Golf", reunion.activities.last.name
+
+    assert_equal 2, reunion.activities.count
     assert_equal 50, reunion.activities.last.cost
   end
 
